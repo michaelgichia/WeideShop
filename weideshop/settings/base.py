@@ -28,15 +28,23 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
+LOCAL_APPS = [
+    'weideshop.public',
+    ]
 
-INSTALLED_APPS = [
+THIRD_PARTY_APPS = []
+
+CORE_APPS = [    
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-]
+    ]
+
+INSTALLED_APPS = LOCAL_APPS + THIRD_PARTY_APPS + CORE_APPS
+
 
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
