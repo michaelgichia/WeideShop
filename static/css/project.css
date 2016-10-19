@@ -1,0 +1,8 @@
+@font-face {
+    font-family: FontAwesome.otf;
+    src: url({% static 'fonts/FontAwesome.otf' %});
+}
+
+div {
+    font-family: FontAwesome.otf;
+}
