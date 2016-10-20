@@ -16,10 +16,12 @@
 
 <body>
 {% include 'includes/navbar.html' %}
-    <div class="container-fluid">
+    <div class="container">
+        <div class="row">
         {% block main %}
         <p>If you are seeing this something is wrong!</p>
         {% endblock %}
+        </div>
     </div>
     <!-- js files -->
     <script src="{% static 'js/jquery-3.1.1.min.js' %}"></script>

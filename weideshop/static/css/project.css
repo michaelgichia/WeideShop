@@ -1,3 +1,34 @@
+.navbar {
+  border-radius: 0 !important;
+}
+
+nav > div > ul >li {
+	font-size: 20px;
+	width: 10%;
+}
+
+.navbar-brand {
+	padding-right: 15%;
+}
+
+.navbar-nav > li > a {
+	padding-top: 10px !important; 
+	padding-bottom:10px !important;
+
+	}
+
+.navbar {
+	min-height:50px !important;
+}
+
+ 
+
+.form-inline {
+	padding-top: 10px !important; 
+	padding-bottom:10px !important;
+
+	}
+
 @font-face {
     font-family: FontAwesome.otf;
     src: url({% static 'fonts/FontAwesome.otf' %});
