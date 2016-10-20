@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 
+{% load staticfiles %}
+
 {% block main %}
-
-<h3>This is index page</h3>
-
+<div class="main-container">
+{% include 'includes/carousel.html' %}
+</div>
 {% endblock %}
