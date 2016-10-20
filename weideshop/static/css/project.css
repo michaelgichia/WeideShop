@@ -32,20 +32,14 @@ nav > div > ul >li {
 /*End of Navbar*/
 
 /*Carousel*/
-.fill {
-	position: absolute;
-}
-
 .carousel-item > img{
        width: 30%;
        height:100%;
    }
-.carousel {
-	position: absolute;
-}
 
 .carousel-inner > .carousel-item> a > img {
 	height: 50%;
+	background-color: transparent;
 }
 
 /*End of carousel*/
