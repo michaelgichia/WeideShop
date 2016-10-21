@@ -1,22 +1,16 @@
-<nav class="navbar navbar-dark bg-inverse">
-    <button class="navbar-toggler hidden-lg-up" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"></button>
-    <div class="collapse navbar-toggleable-md" id="navbarResponsive">
-        <a class="navbar-brand" href="#">WeideShop</a>
-        <ul class="nav navbar-nav style-nav">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-            </li>
-        </ul>
-        <form class="form-inline pull-lg-right">
-            <input class="form-control " type="text" placeholder="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
-    </div>
-</nav>
+{% load staticfiles %}
 
+<header id="header" class="okayNav-header">
+    <a class="okayNav-header__logo" href="#">Logo</a>
+    <nav role="navigation" id="nav-main" class="okayNav">
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">The Collection</a></li>
+            <li><a href="#">Category</a></li>
+            <li><a href="#">Location</a></li>
+            <li><a href="#">Contacts</a></li>
+            <li><a href="#">About us</a></li>
+        </ul>
+    </nav>
+</header>
+<!-- /header -->

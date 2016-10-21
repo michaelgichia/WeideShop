@@ -5,16 +5,20 @@
 <head>
     <title></title>
     <link href="{% static 'css/project.css' %}" rel="stylesheet">
+    <link href="{% static 'css/common.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/okayNav.min.css' %}" rel="stylesheet">
     <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet">
     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
     <link href="{% static 'css/tether.min.css' %}" rel="stylesheet">
-    <link href="{% static 'css/bootstrap.min.css.map' %}" rel="stylesheet">
+    <link href="{% static 'css/bootstrap.css.map' %}" rel="stylesheet">
+    <link href="{% static 'css/bootstrap-theme.min.css.map' %}" rel="stylesheet">
     <link href="{% static 'css/tether-theme-arrows.min.css' %}" rel="stylesheet">
     <link href="{% static 'css/tether-theme-basic.min.css' %}" rel="stylesheet">
 
 </head>
 
 <body>
+<div class="">
 {% include 'includes/navbar.html' %}
     <div class="container">
         <div class="row">
@@ -28,8 +32,13 @@
     <script src="{% static 'js/tether.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <script src="{% static 'js/project.js' %}"></script>
+    <script src="{% static 'js/jquery.okayNav-min.js' %}"></script>
     
-    <!-- end of js files -->
+    <script type="text/javascript">
+        var navigation = $('#nav-main').okayNav();
+    </script>
+    
+ </div>   <!-- end of js files -->
 </body>
 
 </html>

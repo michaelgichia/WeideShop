@@ -1,8 +1,5 @@
-.main-container {
-    padding-top: 0px;
-}
+/***************************The navbar****************************/
 
-/*The navbar*/
 .bg-inverse {
     border-radius: 0!important;
 }
@@ -29,20 +26,25 @@ nav > div > ul >li {
     padding-top: 5px !important;
     padding-bottom: 5px !important;
 }
-/*End of Navbar*/
 
-/*Carousel*/
-.carousel-item > img{
-       width: 30%;
-       height:100%;
-   }
 
-.carousel-inner > .carousel-item> a > img {
-	height: 50%;
-	background-color: transparent;
+/***********************End of Navbar************************/
+
+
+/****************************Carousel***********************/
+
+.carousel {
+    width: 100%!important;    
 }
 
-/*End of carousel*/
+.carousel-item > img {
+    width: 25%;
+}
+.carousel-control.right, 
+.carousel-control.left {
+  background-image:none;
+}
+/****************************End of carousel*******************/
 
 @font-face {
     font-family: FontAwesome.otf;
@@ -52,3 +54,14 @@ nav > div > ul >li {
 div {
     font-family: FontAwesome.otf;
 }
+
+.navbar-toggler {
+    border-radius: 0!important;
+    background-color: #ffffff!important;
+    padding: .6rem .9rem!important;
+    color: #ffffff;
+    height: 2px;
+    width: 2px;
+}
+
+
