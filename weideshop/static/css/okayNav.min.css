@@ -205,9 +205,10 @@ body.okayNav-loaded {
 }
 
 .okayNav__menu-toggle span {
-    background: #2e2e33
+    background: #ffffff
 }
 
 .okayNav__menu-toggle.icon--active span {
-    background: #546edb
+    background: #ffffff
+
 }
