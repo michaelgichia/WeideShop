@@ -1,5 +1,9 @@
 /***************************The navbar****************************/
-
+body {
+    background-color: transparent!important;
+    color: transparent!important;
+    padding-top: 70px;
+}
 .bg-inverse {
     border-radius: 0!important;
 }
@@ -33,17 +37,6 @@ nav > div > ul >li {
 
 /****************************Carousel***********************/
 
-.carousel {
-    width: 100%!important;    
-}
-
-.carousel-item > img {
-    width: 25%;
-}
-.carousel-control.right, 
-.carousel-control.left {
-  background-image:none;
-}
 /****************************End of carousel*******************/
 
 @font-face {

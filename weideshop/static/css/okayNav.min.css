@@ -98,9 +98,9 @@ body.okayNav-loaded {
 
 .okayNav__nav--invisible a {
     display: block;
-    width: 240px;
+    width: 200px;
     padding: 15px;
-    background: #fff
+    background: black;
 }
 
 .okayNav__nav--invisible.nav-left {
