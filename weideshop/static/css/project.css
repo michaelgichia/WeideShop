@@ -1,0 +1,10 @@
+.col-xs-6 {
+    padding-top: 1px!important;
+    padding-left: 10px!important;
+    padding-right: 10px!important;
+    padding-bottom: 1px!important;
+}
+
+.thumbnail {
+    background-color: pink;
+}
