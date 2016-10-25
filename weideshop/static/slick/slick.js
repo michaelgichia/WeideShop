@@ -149,7 +149,7 @@
 
             _.originalSettings = _.options;
 
-            if (typeof document.mozHidden !== 'undefined') {
+            if (typeof document.hidden !== 'undefined') {
                 _.hidden = 'mozHidden';
                 _.visibilityChange = 'mozvisibilitychange';
             } else if (typeof document.webkitHidden !== 'undefined') {
