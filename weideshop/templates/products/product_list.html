@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block main %}
+<section class="catalogue-section">
+	<h2> Products </h2>
+	<div class="row">
+	{% if object_list %}
+		{% for product in object_list %}
+		<ul>
+		{% csrf_token %}
+			<h3 style="color: pink;">{{ product.name }}</h3>
+			<p>{{ product.description }}</p> 
+
+			<img src="{{ product.image.url }}" alt="" height="300" width="300">
+			<hr>
+		</ul>
+		{% endfor %}
+	{% else %}
+	<div class="row">{% trans "No photos were found" %}.</div>
+	{% endif %}
+	</div>
+</section>
+{% endblock %}
