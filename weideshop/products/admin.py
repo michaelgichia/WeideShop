@@ -6,6 +6,7 @@ Product = apps.get_model('products', 'Product')
 
 
 class ProductAdmin(admin.ModelAdmin):
+	list_display = ('name', 'old_price', 'price')
 	prepopulated_fields = {'slug': ('name',)}
 
 admin.site.register(Product, ProductAdmin)

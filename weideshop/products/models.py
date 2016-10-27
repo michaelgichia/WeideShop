@@ -12,7 +12,8 @@ class Product(models.Model):
                             help_text=_('A "slug" is a unique URL-friendly title for an object.'))	
 	old_price = models.DecimalField(max_digits=9, decimal_places=2, blank=True,default=0.00)
 	price = models.DecimalField(max_digits=6, decimal_places=2, blank=True, default=0.00)
-	photo = models.ImageField(upload_to='photos',
+	photo = models.ImageField(max_length=100,
+							upload_to='photos',
 							verbose_name=_('product'))
 	is_offer = models.BooleanField(default=False,
 									help_text=_('Will display as offer product.'))
@@ -25,9 +26,8 @@ class Product(models.Model):
 		verbose_name_plural = 'products'
 
 	def __str__(self):
-		return self.name
+		return self.name	
 
 	def get_absolute_url(self):
 		return reverse('catalogue:gallery', args=[self.slug])
-
 
