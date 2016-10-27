@@ -28,14 +28,9 @@
 </head>
 
 <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
-
-    {% include 'includes/navbar.html' %}
-   
-    
-            {% block main %}
-            <p>If you are seeing this something is wrong!</p>
-            {% endblock %}
-  
+    {% include 'includes/navbar.html' %} {% block main %}
+    <p>If you are seeing this something is wrong!</p>
+    {% endblock %}
     <!-- js files -->
     <script src="{% static 'js/jquery.js' %}"></script>
     <script src="{% static 'js/jquery.easing.min.js' %}"></script>

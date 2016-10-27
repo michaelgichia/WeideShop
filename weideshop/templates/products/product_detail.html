@@ -1,0 +1,16 @@
+{% extends "base.html" %} 
+{% load i18n %} 
+{% block title %}{{ object.title }}{% endblock %} 
+
+{% block main %}
+<section class="catalogue-section">
+<div class="row col-lg-12">
+<h1 class="page-header">{{ object.name }}</h1>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <img src="{{ object.photo.url }}" class="thumbnail" alt="{{ object.title }}" height="300" width="300">
+    </div>
+</div>
+</section>
+{% endblock %}

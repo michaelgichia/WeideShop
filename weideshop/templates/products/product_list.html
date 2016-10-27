@@ -11,7 +11,7 @@
 	<div class="row">
 	    {% for product in object_list %}
 	    <div class="col-xs-6 col-md-3">
-	        <a href="#" class="thumbnail">
+	        <a href="{{ product.get_absolute_url }}" class="thumbnail">
 	            <img src="{{ product.photo.url }}" alt="" height="300" width="300">
 	        </a>
 	    </div>

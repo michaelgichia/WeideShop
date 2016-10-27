@@ -23,7 +23,7 @@ from weideshop.public.views import IndexView
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$',IndexView.as_view(), name='home'),
-    url(r'^products/', include('weideshop.products.urls'))
+    url(r'^catalogue/', include('weideshop.products.urls'))
 ] 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

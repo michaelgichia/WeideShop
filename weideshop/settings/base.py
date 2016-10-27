@@ -30,7 +30,9 @@ LOCAL_APPS = [
     'weideshop.products',
     ]
 
-THIRD_PARTY_APPS = []
+THIRD_PARTY_APPS = [
+    'mptt',
+    ]
 
 CORE_APPS = [    
     'django.contrib.admin',
