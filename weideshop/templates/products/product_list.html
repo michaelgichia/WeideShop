@@ -12,13 +12,13 @@
 	    {% for product in object_list %}
 	    <div class="col-xs-6 col-md-3">
 	        <a href="{{ product.get_absolute_url }}" class="thumbnail">
-	            <img src="{{ product.photo.url }}" alt="" height="300" width="300">
+	            <img src="{{ product.image.url }}" alt="" height="300" width="300">
 	        </a>
 	    </div>
 	    {% endfor %}
 	</div>
 	{% else %}
-	<div class="row">{% trans "No photos were found" %}.</div>
+	<div class="row">{% trans "No products were found" %}.</div>
 	{% endif %}
 	</div>
 

@@ -31,7 +31,7 @@ LOCAL_APPS = [
     ]
 
 THIRD_PARTY_APPS = [
-    'mptt',
+   
     ]
 
 CORE_APPS = [    
