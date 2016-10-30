@@ -4,18 +4,29 @@ from django.apps import apps
 
 # Imports models so to register them to admin
 Category = apps.get_model('products', 'Category')
+Subcategory = apps.get_model('products', 'Subcategory')
 Product = apps.get_model('products', 'Product')
 
 
 class CategoryAdmin(admin.ModelAdmin):
-	list_display = ('title', 'description', 'date_created', 'date_updated')
+	list_display = ('name', 'slug')
 	list_per_page = 30
-	ordering = ['title']
-	search_fields = ['title', 'description', 'meta_keywords']
-	prepopulated_fields = {'slug': ('title',),}
+	ordering = ['name']
+	search_fields = ['name',]
+	prepopulated_fields = {'slug': ('name',),}
 
 # Register models to admin panel
-admin.site.register(Category, CategoryAdmin)
+admin.site.register(Category,CategoryAdmin)
+
+class SubcategoryAdmin(admin.ModelAdmin):
+	list_display = ('name', 'description', 'date_created', 'date_updated')
+	list_per_page = 30
+	ordering = ['name']
+	search_fields = ['name', 'description', 'meta_keywords']
+	prepopulated_fields = {'slug': ('name',),}
+
+# Register models to admin panel
+admin.site.register(Subcategory, SubcategoryAdmin)
 
 
 class ProductAdmin(admin.ModelAdmin):

@@ -1,0 +1,26 @@
+{% extends 'base.html' %} 
+
+{% load i18n %} 
+
+{% block main %}
+<section class="category-section">
+	<div>
+	    <h2>{% trans "Category" %}</h2>
+	</div>
+	{% if object_list %}
+	<div class="">
+	    {% for category in object_list %}
+	    <div class="col-xs-12 col-md-12">
+	        <span>{{ category.title }}</span>
+	        <br>
+	        <span>{{ category.description }}</span>
+	    </div>
+	    {% endfor %}
+	</div>
+	{% else %}
+	<div class="row">{% trans "No Category were found" %}.</div>
+	{% endif %}
+	</div>
+
+</section>
+{% endblock %}
