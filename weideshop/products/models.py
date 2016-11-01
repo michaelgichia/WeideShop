@@ -17,17 +17,22 @@ class ActiveCategoryManager(models.Manager):
 		"""
 		return self.get_queryset().filter(active=True)
 
-class Category(MPTTModel):
-
-	parent = TreeForeignKey(
-		'self',
-		blank=True,
-		null=True,
-		related_name='children',
-		verbose_name=_('parent'))
-
+class Category(models.Model):
+	"""
+	This is the high level in the product system. It describe how 
+	products category are stored.
+	E.g Watches, Clothes, Mobile phones e.t.c
+	"""
 	name = models.CharField(max_length=100, 
+		unique=True, 
 		verbose_name=_('name'))
+
+	# parent = models.ManyToManyField(
+	# 	'self',
+	# 	blank=True,
+	# 	related_name='children',
+	# 	db_index=True,
+	# 	verbose_name=_('parent'))
 
 	slug = models.SlugField(max_length=50, 
 		unique=True,
@@ -37,17 +42,13 @@ class Category(MPTTModel):
 		verbose_name=_('active'))
 
 	active = ActiveCategoryManager()
-	tree = TreeManager()
+
+	def __str__(self):
+		return self.name 
 
 	class Meta:
 		verbose_name_plural = 'categories'
 		ordering = ['name']
-
-	class MPTTMeta:
-		order_insertion_by = ('name',)
-
-	def __str__(self):
-		return '%s' % self.name 
 
 	def get_absolute_url(self):
 		return reverse('category', kwargs={'slug': self.slug})
@@ -65,23 +66,24 @@ class Subcategory(models.Model):
 		unique=True,
 		help_text=_('A short label, generally used in URLs.'))
 
-	description = models.TextField()
+	description = models.TextField(blank=True)
 	date_created = models.DateTimeField(_('Date created.'), 
 		auto_now_add=True)
 
 	date_updated = models.DateTimeField(auto_now=True)
 	meta_keywords = models.CharField(max_length=255,
+		blank=True,
 		help_text=_('Tell search engines what the' 
 					'topic of the page is.'))
 	# Managers
 	objects = models.Manager()
 
-	class Meta:
-		verbose_name_plural = 'sub-categories'
-		ordering = ['name']
-
 	def __str__(self):
-		return '%s' % self.name
+		return  self.name
+
+	class Meta:
+		verbose_name_plural = 'sub-category'
+		ordering = ['name']
 
 	def get_absolute_url(self):
 		return reverse('category_list', kwargs={'slug': self.slug})
@@ -126,30 +128,30 @@ class Product(models.Model):
 	This model describes the products.
 	"""
 	name = models.CharField(max_length=255, 
-				unique=True)
+		unique=True)
 
 	slug = models.SlugField(max_length=100, 
-				unique=True,
-				help_text=_('A short label, generally used in URLs.'))
+		unique=True,
+		help_text=_('A short label, generally used in URLs.'))
 
 	image = models.ImageField(max_length=100,
-				upload_to='photos',
-				verbose_name=_('product'))
+		upload_to='photos',
+		verbose_name=_('product'))
 
 	thumbnail_caption = models.CharField(max_length=255)
 	description = models.TextField(_('description'), 
-					blank=True)
+		blank=True)
 
 	quantity = models.PositiveIntegerField(null=True, 
-					default=0)
+		default=0)
 
 	old_price = models.DecimalField(max_digits=9, 
-					decimal_places=2, 
-					blank=True)
+		decimal_places=2, 
+		blank=True)
 
 	price = models.DecimalField(max_digits=6, 
-				decimal_places=2, 
-				blank=True)
+		decimal_places=2, 
+		blank=True)
 
 	is_active = models.BooleanField(default=True, 
 		verbose_name=_('active'))
@@ -173,12 +175,12 @@ class Product(models.Model):
 	featured = FeaturedProductManager()
 	offer = OfferProductManager()
 
+	def __str__(self):
+		return self.name
+
 	class Meta:
 		verbose_name_plural = 'products'
 		ordering = ['-date_created']
-
-	def __str__(self):
-		return '%s' % self.name
 
 	def get_absolute_url(self):
 		return reverse('detail', kwargs={'slug': self.slug})	

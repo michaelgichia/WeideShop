@@ -16,7 +16,7 @@ html {
 
 @media(min-width:767px) {
     .navbar {
-        padding: 20px 0;
+        padding-bottom: 20px;
         -webkit-transition: background .5s ease-in-out, padding .5s ease-in-out;
         -moz-transition: background .5s ease-in-out, padding .5s ease-in-out;
         transition: background .5s ease-in-out, padding .5s ease-in-out;
@@ -75,4 +75,11 @@ of those sections to manage the look and feel of the site. */
     padding-top: 30px;
     text-align: center;
     background: #eee;
+}
+
+.category-section {
+    height: auto;
+    padding-top: 100px;
+    text-align: center;
+    background: #fff;
 }

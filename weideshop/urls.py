@@ -19,16 +19,15 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 from weideshop.public.views import IndexView
-from weideshop.products.views import  SubcategoryListView
-
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$',IndexView.as_view(), name='home'),
-    url(r'^catalogue/', include('weideshop.products.urls')),
-    url(r'^categories/$', SubcategoryListView.as_view(), name='category_list'),
+    url(r'^category/', include('weideshop.products.urls')),
+    
 
 ] 
+
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
