@@ -4,7 +4,6 @@ from django.core.urlresolvers import reverse
 
 from mptt.models import MPTTModel
 from mptt.fields import TreeForeignKey
-from mptt.managers import TreeManager
 
 # Create your models here.
 class ActiveCategoryManager(models.Manager):
@@ -17,22 +16,20 @@ class ActiveCategoryManager(models.Manager):
 		"""
 		return self.get_queryset().filter(active=True)
 
-class Category(models.Model):
+class Category(MPTTModel):
 	"""
 	This is the high level in the product system. It describe how 
 	products category are stored.
 	E.g Watches, Clothes, Mobile phones e.t.c
 	"""
-	name = models.CharField(max_length=100, 
-		unique=True, 
-		verbose_name=_('name'))
+	name = models.CharField(max_length=50, 
+		unique=True)
 
-	# parent = models.ManyToManyField(
-	# 	'self',
-	# 	blank=True,
-	# 	related_name='children',
-	# 	db_index=True,
-	# 	verbose_name=_('parent'))
+	parent = TreeForeignKey('self', 
+		null=True, 
+		blank=True, 
+		related_name='children', 
+		db_index=True)
 
 	slug = models.SlugField(max_length=50, 
 		unique=True,
@@ -40,11 +37,15 @@ class Category(models.Model):
 
 	is_active = models.BooleanField(default=True, 
 		verbose_name=_('active'))
-
+	
+	objects = models.Manager()
 	active = ActiveCategoryManager()
 
 	def __str__(self):
-		return self.name 
+		return self.name
+
+	class MPTTMeta:
+		order_insertion_by = ['name']
 
 	class Meta:
 		verbose_name_plural = 'categories'
@@ -86,7 +87,7 @@ class Subcategory(models.Model):
 		ordering = ['name']
 
 	def get_absolute_url(self):
-		return reverse('category_list', kwargs={'slug': self.slug})
+		return reverse('sub_category', kwargs={'slug': self.slug})
 
 
 class ActiveProductManager(models.Manager):
@@ -149,8 +150,8 @@ class Product(models.Model):
 		decimal_places=2, 
 		blank=True)
 
-	price = models.DecimalField(max_digits=6, 
-		decimal_places=2, 
+	price = models.DecimalField(max_digits=10, 
+		decimal_places=5, 
 		blank=True)
 
 	is_active = models.BooleanField(default=True, 

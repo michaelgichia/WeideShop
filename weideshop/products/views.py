@@ -11,11 +11,10 @@ class CategoryListView(ListView):
 	Browse all products in the categories.
 	"""
 	models = Category
+	template_name = 'products/category_list.html'
 
-	def get_queryset(self, **kwargs):
-		
+	def get_queryset(self):
 		return Category.objects.get_queryset().all()
-
 
 class SubcategoryListView(ListView):
 	"""
