@@ -1,7 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView
 from django.views.generic.base import TemplateView
-from django.utils import timezone
 
 from .models import Product, Subcategory, Category 
 
@@ -31,15 +30,28 @@ class SubcategoryListView(ListView):
 		"""
 		Returns all sub-categories.
 		"""
-		category = get_object_or_404(Category, slug = self.kwargs.get('slug'))
-		return Subcategory.objects.filter(category = category)
+		self.category = get_object_or_404(Category, slug = self.kwargs.get('slug'))
+		return Subcategory.objects.filter(category = self.category)
+
+
+class ProductListView(ListView):
+	"""
+	Return products according to previous selected subcategory.
+	"""
+	model = Product
+
+	def get_queryset(self):
+		"""
+		Display all products under selected subcategory.
+		"""
+		self.subcategory = get_object_or_404(Subcategory, slug = self.kwargs.get('slug'))
+		return Product.objects.filter(subcategory=self.subcategory)
 
 
 class CatalogueListView(ListView):
 	"""
 	Display all products in the db.
 	"""
-
 	model = Product
 
 	def get_queryset(self):
@@ -53,6 +65,5 @@ class ProductDetailView(DetailView):
 	"""
 	Display individual products details
 	"""
-
 	model = Product
 
