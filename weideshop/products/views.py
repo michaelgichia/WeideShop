@@ -66,4 +66,5 @@ class ProductDetailView(DetailView):
 	Display individual products details
 	"""
 	model = Product
-
+	template_name = 'products/product_detail.html'
+	slug_field = 'slug'

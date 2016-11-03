@@ -5,6 +5,7 @@
 {% block main %}
 <section class="catalogue-section">
 	<div>
+	<h1>Fix me</h1>
 	    <h2>{% trans "Products" %}</h2>
 	</div>
 	{% if object_list %}
@@ -13,7 +14,9 @@
 	    <div class="col-xs-6 col-md-3">
 	        <a href="{{ product.get_absolute_url }}" class="thumbnail">
 	            <img src="{{ product.image.url }}" alt="" height="300" width="300">
+
 	        </a>
+	        <p>{{ product.slug }}</p>
 	    </div>
 	    {% endfor %}
 	</div>
