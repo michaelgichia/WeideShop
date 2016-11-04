@@ -18,12 +18,17 @@ from django.contrib import admin
 from django.conf.urls.static import static
 from django.conf import settings
 
+from weideshop.products.views import CatalogueListView,CatalogueDetailView 
 from weideshop.public.views import IndexView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$',IndexView.as_view(), name='home'),
-    url(r'^category/', include('weideshop.products.urls')),
+
+    url(r'^catalog/$', CatalogueListView.as_view(), name='catalogue'),
+    url(r'^catalog/(?P<product_slug>[-\w]+)/$', CatalogueDetailView.as_view(), name='detail'),
+
+    url(r'^category/', include('weideshop.products.urls', namespace='product-app')),
     
 
 ] 

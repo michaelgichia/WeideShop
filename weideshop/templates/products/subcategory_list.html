@@ -5,14 +5,17 @@
 
 {% block main %}
 <section class="category-section">
+<h1>Fix Me</h1>
 {% if object_list %}
 <div class="col-xs-2 col-md-2">
     <h2>{% trans "Sub-Category" %}</h2> 
-    {% for sub_category in object_list %}
+    {% for object in object_list %}
+
 	    <div class="col-xs-12 col-md-12">
-	    	<a href="">{{ sub_category.name }}</a>
-	    	<p>{{ sub_category.slug }}</p>
+	    	<a href="{% url 'product-app:product-list' object.subcategory_slug %}">{{ object.name }}</a>
+	    	<p>{{ object.subcategory_slug }}</p>
 	    </div>
+
     {% endfor %}
 </div>
 {% else %}

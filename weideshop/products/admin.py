@@ -23,7 +23,7 @@ class SubcategoryAdmin(admin.ModelAdmin):
 	list_per_page = 30
 	ordering = ['name']
 	search_fields = ['name', 'description', 'meta_keywords']
-	prepopulated_fields = {'slug': ('name',),}
+	prepopulated_fields = {'subcategory_slug': ('name',),}
 
 # Register models to admin panel
 admin.site.register(Subcategory, SubcategoryAdmin)
@@ -35,7 +35,7 @@ class ProductAdmin(admin.ModelAdmin):
 	list_per_page = 30
 	ordering = ['-date_created']
 	search_fields = ['name', 'description', 'meta_keywords']
-	prepopulated_fields = {'slug': ('name',),}
+	prepopulated_fields = {'product_slug': ('name',),}
 
 # Register models to admin panel
 admin.site.register(Product, ProductAdmin)

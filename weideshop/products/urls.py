@@ -1,11 +1,12 @@
 from django.conf.urls import url, include
 
-from .views import CatalogueListView, ProductDetailView, SubcategoryListView, CategoryListView, ProductListView
+from .views import SubcategoryListView, CategoryListView, ProductListView
 
+app_name = 'product-app'
 
 urlpatterns = [
 	url(r'^$', CategoryListView.as_view(), name='category'),
-    url(r'^catalog/$', CatalogueListView.as_view(), name='category_catalog'),
     url(r'^(?P<slug>[-\w]+)/$', SubcategoryListView.as_view(), name='sub-category'),
-    url(r'^catalog/(?P<slug>[-\w]+)/$', ProductDetailView.as_view(), name='detail'),
+    url(r'^(?P<slug>[-\w]+)/(?P<product_slug>[-\w]+)/$', ProductListView.as_view(), name='product-list'),
+
 ] 

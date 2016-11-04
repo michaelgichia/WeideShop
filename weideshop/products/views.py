@@ -21,7 +21,7 @@ class CategoryListView(ListView):
 
 class SubcategoryListView(ListView):
 	"""
-	Browse all products in the catalogue.
+	Browse all products in the sub-catalogue.
 	"""
 	model = Subcategory
 	template_name = 'products/subcategory_list.html'
@@ -44,7 +44,7 @@ class ProductListView(ListView):
 		"""
 		Display all products under selected subcategory.
 		"""
-		self.subcategory = get_object_or_404(Subcategory, slug = self.kwargs.get('slug'))
+		self.subcategory = get_object_or_404(Subcategory, subcategory_slug = self.kwargs.get('subcategory_slug'))
 		return Product.objects.filter(subcategory=self.subcategory)
 
 
@@ -61,10 +61,23 @@ class CatalogueListView(ListView):
 		return Product.objects.get_queryset().all()
 		
 
-class ProductDetailView(DetailView):
+class CatalogueDetailView(DetailView):
 	"""
 	Display individual products details
 	"""
 	model = Product
 	template_name = 'products/product_detail.html'
-	slug_field = 'slug'
+	slug_field = 'product_slug'
+
+	def get_object(self):
+		# Call the superclass
+		object = super(CatalogueDetailView, self).get_object()
+		return object
+
+
+	# model = Product
+	# template_name = 'products/product_detail.html'
+	# slug_field = 'product_slug'
+
+
+

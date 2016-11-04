@@ -63,7 +63,7 @@ class Subcategory(models.Model):
 		unique=True)
 
 	category = models.ForeignKey(Category)
-	slug = models.SlugField(max_length=50, 
+	subcategory_slug = models.SlugField(max_length=50, 
 		unique=True,
 		help_text=_('A short label, generally used in URLs.'))
 
@@ -131,7 +131,7 @@ class Product(models.Model):
 	name = models.CharField(max_length=255, 
 		unique=True)
 
-	slug = models.SlugField(max_length=100, 
+	product_slug = models.SlugField(max_length=100, 
 		unique=True,
 		help_text=_('A short label, generally used in URLs.'))
 
@@ -184,5 +184,5 @@ class Product(models.Model):
 		ordering = ['-date_created']
 
 	def get_absolute_url(self):
-		return reverse('detail', kwargs={'slug': self.slug})	
+		return reverse('detail', kwargs={'product_slug': self.product_slug})	
 
