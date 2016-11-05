@@ -28,10 +28,11 @@ ALLOWED_HOSTS = []
 LOCAL_APPS = [
     'weideshop.public',
     'weideshop.products',
+
     ]
 
 THIRD_PARTY_APPS = [
-    'mptt',
+    'autoslug',
     ]
 
 CORE_APPS = [    

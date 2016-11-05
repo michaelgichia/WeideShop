@@ -5,12 +5,12 @@
 {% block main %}
 <section class="category-section">
 {% if object_list %}
-<div class="col-xs-2 col-md-2">
+<div class="col-xs-12 col-md-12">
     <h2>{% trans "Category" %}</h2> 
     {% for category in object_list %}
 	    <div class="col-xs-12 col-md-12">
-	    	<a href="{% url 'product-app:sub-category' category.slug %}">{{ category.name }}</a>
-	    	<p>{{ category.slug }}</p>
+	    	<a href="{% url 'products-app:sub-category' category.category_slug %}">{{ category.name }}</a>
+	    	<p>{{ category.category_slug }}</p>
 	    </div>
     {% endfor %}
 </div>
@@ -20,3 +20,4 @@
 </section>
 
 {% endblock %}
+

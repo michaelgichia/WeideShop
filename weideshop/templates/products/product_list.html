@@ -4,26 +4,28 @@
 
 {% block main %}
 <section class="catalogue-section">
-	<div>
+	<div class="col-xs-12 col-md-12" align="center">
 	<h1>Fix me</h1>
-	    <h2>{% trans "Products" %}</h2>
+	    <h1>{% trans "Products List" %}</h1>
 	</div>
 	{% if object_list %}
-	<div class="row">
+	<div class="col-xs-12 col-md-12">
 	    {% for product in object_list %}
-	    <div class="col-xs-6 col-md-3">
-	        <a href="{{ product.get_absolute_url }}" class="thumbnail">
-	            <img src="{{ product.image.url }}" alt="" height="300" width="300">
+	    <div class="" align="center">
+	    	<a href="">{{ object.name }}</a>
 
-	        </a>
-	        <p>{{ product.slug }}</p>
+	        <a href="" class="">{{ product.name }}</a>
+	        <h6>Hi</h6>
+	        <h6>{{ product.product_slug }}</h6>
+	        <h6>{{ product.id }}</h6>
 	    </div>
 	    {% endfor %}
 	</div>
 	{% else %}
-	<div class="row">{% trans "No products were found" %}.</div>
+	<div class="col-xs-12 col-md-12" align="center">{% trans "No products were found" %}.</div>
 	{% endif %}
 	</div>
 
 </section>
 {% endblock %}
+

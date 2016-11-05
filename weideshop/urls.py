@@ -26,13 +26,8 @@ urlpatterns = [
     url(r'^$',IndexView.as_view(), name='home'),
 
     url(r'^catalog/$', CatalogueListView.as_view(), name='catalogue'),
-    url(r'^catalog/(?P<product_slug>[-\w]+)/$', CatalogueDetailView.as_view(), name='detail'),
+    # url(r'^catalog/(?P<product_slug>[-\w]+)/$', CatalogueDetailView.as_view(), name='detail'),
 
-    url(r'^category/', include('weideshop.products.urls', namespace='product-app')),
+    url(r'^category/', include('weideshop.products.urls', namespace='products-app', app_name='products')),
     
-
 ] 
-
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
-urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

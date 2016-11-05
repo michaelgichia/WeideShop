@@ -1,12 +1,16 @@
-from django.db import models
+# -*- coding: utf-8 -*-
+
+# Third Party Stuff
+from django.db.models import Model, CharField, ForeignKey, BooleanField, Manager, TextField, DateTimeField, ImageField, DecimalField, PositiveIntegerField, ManyToManyField
 from django.utils.translation import ugettext_lazy as _
 from django.core.urlresolvers import reverse
+from django.utils.text import slugify
+from autoslug import AutoSlugField
+from django.template.defaultfilters import slugify
 
-from mptt.models import MPTTModel
-from mptt.fields import TreeForeignKey
 
 # Create your models here.
-class ActiveCategoryManager(models.Manager):
+class ActiveCategoryManager(Manager):
 	"""
 	A manager that returns active categories.
 	"""
@@ -16,68 +20,68 @@ class ActiveCategoryManager(models.Manager):
 		"""
 		return self.get_queryset().filter(active=True)
 
-class Category(MPTTModel):
+
+class Category(Model):
 	"""
 	This is the high level in the product system. It describe how 
 	products category are stored.
 	E.g Watches, Clothes, Mobile phones e.t.c
 	"""
-	name = models.CharField(max_length=50, 
+	name = CharField(max_length=50, 
 		unique=True)
 
-	parent = TreeForeignKey('self', 
+	parent = ForeignKey('self', 
 		null=True, 
 		blank=True, 
 		related_name='children', 
 		db_index=True)
 
-	slug = models.SlugField(max_length=50, 
+	category_slug = AutoSlugField(max_length=255,
+		populate_from=('name'), 
 		unique=True,
 		help_text=_('A short label, generally used in URLs.'))
 
-	is_active = models.BooleanField(default=True, 
+	is_active = BooleanField(default=True, 
 		verbose_name=_('active'))
 	
-	objects = models.Manager()
+	objects = Manager()
 	active = ActiveCategoryManager()
 
 	def __str__(self):
 		return self.name
-
-	class MPTTMeta:
-		order_insertion_by = ['name']
 
 	class Meta:
 		verbose_name_plural = 'categories'
 		ordering = ['name']
 
 	def get_absolute_url(self):
-		return reverse('category', kwargs={'slug': self.slug})
+		return reverse('category-detail', kwargs={'category_slug': self.category_slug, 'pk': self.id})
 
 
-class Subcategory(models.Model):
+class Subcategory(Model):
 	"""
 	Model class describing category of products.
 	"""
-	name = models.CharField(max_length=100, 
+	name = CharField(max_length=100, 
 		unique=True)
 
-	category = models.ForeignKey(Category)
-	subcategory_slug = models.SlugField(max_length=50, 
+	category = ForeignKey(Category)
+	subcategory_slug = AutoSlugField(max_length=255,
+		populate_from=('name'), 
 		unique=True,
 		help_text=_('A short label, generally used in URLs.'))
 
-	description = models.TextField(blank=True)
-	date_created = models.DateTimeField(_('Date created.'), 
+	description = TextField(blank=True)
+	date_created = DateTimeField(_('Date created.'), 
 		auto_now_add=True)
 
-	date_updated = models.DateTimeField(auto_now=True)
-	meta_keywords = models.CharField(max_length=255,
+	date_updated = DateTimeField(auto_now=True)
+	meta_keywords = CharField(max_length=255,
 		blank=True,
 		help_text=_('Tell search engines what the' 
 					'topic of the page is.'))
 	# Managers
-	objects = models.Manager()
+	objects = Manager()
 
 	def __str__(self):
 		return  self.name
@@ -87,10 +91,10 @@ class Subcategory(models.Model):
 		ordering = ['name']
 
 	def get_absolute_url(self):
-		return reverse('sub_category', kwargs={'slug': self.slug})
+		return reverse('sub-category-detail', kwargs={'subcategory_slug': self.subcategory_slug, 'pk': self.id})
 
 
-class ActiveProductManager(models.Manager):
+class ActiveProductManager(Manager):
 	"""
 	A manager that returns active products.
 	"""
@@ -101,7 +105,7 @@ class ActiveProductManager(models.Manager):
 		return self.get_queryset().filter(active=True)
 
 
-class FeaturedProductManager(models.Manager):
+class FeaturedProductManager(Manager):
 	""""
 	A manager that returns featured and also active products.
 	"""
@@ -114,7 +118,7 @@ class FeaturedProductManager(models.Manager):
 		return context
 
 
-class OfferProductManager(models.Manager):
+class OfferProductManager(Manager):
 	"""
 	This manager class returns products that are in offer.
 	"""
@@ -124,54 +128,59 @@ class OfferProductManager(models.Manager):
 		return context
 
 
-class Product(models.Model):
+class Product(Model):
 	"""
 	This model describes the products.
 	"""
-	name = models.CharField(max_length=255, 
+	name = CharField(max_length=255, 
 		unique=True)
 
-	product_slug = models.SlugField(max_length=100, 
+	product_slug = AutoSlugField(max_length=255,
+		populate_from=('name'), 
 		unique=True,
 		help_text=_('A short label, generally used in URLs.'))
 
-	image = models.ImageField(max_length=100,
-		upload_to='photos',
+	image = ImageField(upload_to='photos',
 		verbose_name=_('product'))
 
-	thumbnail_caption = models.CharField(max_length=255)
-	description = models.TextField(_('description'), 
+	caption = CharField(max_length=255,
+		blank=True,
+		help_text=_('This is a short description on thumbnail'))
+
+	description = TextField(_('description'), 
 		blank=True)
 
-	quantity = models.PositiveIntegerField(null=True, 
+	quantity = PositiveIntegerField(null=True, 
 		default=0)
 
-	old_price = models.DecimalField(max_digits=9, 
+	old_price = DecimalField(null=True,
+		max_digits=10, 
 		decimal_places=2, 
 		blank=True)
 
-	price = models.DecimalField(max_digits=10, 
-		decimal_places=5, 
+	price = DecimalField(null=True,
+		max_digits=10, 
+		decimal_places=2, 
 		blank=True)
 
-	is_active = models.BooleanField(default=True, 
+	is_active = BooleanField(default=True, 
 		verbose_name=_('active'))
 
-	is_featured = models.BooleanField(default=False,
+	is_featured = BooleanField(default=False,
 		verbose_name=_('in offer'))
 
-	is_offer = models.BooleanField(default=False,
+	is_offer = BooleanField(default=False,
 		verbose_name=_('featured'),
 		help_text=_('Will display as product in offer.'))
 
-	date_created = models.DateTimeField(_("Date created"), 
+	date_created = DateTimeField(_("Date created"), 
 						auto_now_add=True)
 
-	date_updated = models.DateTimeField(auto_now=True)
-	sub_category = models.ManyToManyField(Subcategory)
+	date_updated = DateTimeField(auto_now=True)
+	sub_category = ManyToManyField(Subcategory)
 
 	# Managers
-	objects = models.Manager()
+	objects = Manager()
 	active = ActiveProductManager()
 	featured = FeaturedProductManager()
 	offer = OfferProductManager()
@@ -184,5 +193,5 @@ class Product(models.Model):
 		ordering = ['-date_created']
 
 	def get_absolute_url(self):
-		return reverse('detail', kwargs={'product_slug': self.product_slug})	
+		return reverse('product-detail', kwargs={'product_slug': self.product_slug, 'pk': self.id})	
 

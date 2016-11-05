@@ -9,11 +9,10 @@ Product = apps.get_model('products', 'Product')
 
 
 class CategoryAdmin(admin.ModelAdmin):
-	list_display = ('name', 'slug')
+	list_display = ('name', 'category_slug')
 	list_per_page = 30
 	ordering = ['name']
 	search_fields = ['name',]
-	prepopulated_fields = {'slug': ('name',),}
 
 # Register models to admin panel
 admin.site.register(Category,CategoryAdmin)
@@ -23,7 +22,6 @@ class SubcategoryAdmin(admin.ModelAdmin):
 	list_per_page = 30
 	ordering = ['name']
 	search_fields = ['name', 'description', 'meta_keywords']
-	prepopulated_fields = {'subcategory_slug': ('name',),}
 
 # Register models to admin panel
 admin.site.register(Subcategory, SubcategoryAdmin)
@@ -35,7 +33,6 @@ class ProductAdmin(admin.ModelAdmin):
 	list_per_page = 30
 	ordering = ['-date_created']
 	search_fields = ['name', 'description', 'meta_keywords']
-	prepopulated_fields = {'product_slug': ('name',),}
 
 # Register models to admin panel
 admin.site.register(Product, ProductAdmin)
