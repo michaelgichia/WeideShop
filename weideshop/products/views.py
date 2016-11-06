@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView
 from django.views.generic.base import TemplateView
+from django.views.generic.list import MultipleObjectMixin
 
 from .models import Product, Subcategory, Category 
 
@@ -28,13 +29,24 @@ class SubcategoryListView(ListView):
 	template_name = 'products/subcategory_list.html'
 	context_object_name = "Sub-Category list"
 	category_model = Category
-	
+
 	def get_queryset(self):
 		"""
 		Returns all sub-categories.
 		"""
-		self.category = get_object_or_404(Category, slug = self.kwargs.get('slug'))
+		self.category = get_object_or_404(Category, category_slug = self.kwargs.get('category_slug'))
 		return Subcategory.objects.filter(category = self.category)
+
+	def get_context_data(self, **kwargs):
+		"""
+		Returns self.category_slug needed 
+		on the subcategory_list.html as a
+		one of the {% url %} slug params.
+		"""
+		context = super(SubcategoryListView, self).get_context_data(**kwargs)
+		context['categories'] = Category.objects.all()
+		context['category_slug'] = self.kwargs.get('category_slug')
+		return context
 
 
 class ProductListView(ListView):

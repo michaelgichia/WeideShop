@@ -1,6 +1,6 @@
 from django.conf.urls import url, include
 
-from .views import SubcategoryListView, CategoryListView, ProductListView, ProductDetailView
+from .views import CategoryListView, SubcategoryListView, ProductListView, ProductDetailView
 
 app_name = 'products'
 
