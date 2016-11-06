@@ -90,6 +90,9 @@ class ProductDetailView(DetailView):
 	model = Product
 
 	def get_object(self):
+		"""
+		For unknown reasons :) you must pass self.product_slug
+		"""
 		object = get_object_or_404(Product, product_slug=self.kwargs['product_slug'])
 		return object 
 	
