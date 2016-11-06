@@ -4,26 +4,23 @@
 
 {% block main %}
 <section class="catalogue-section">
-	<div class="col-xs-12 col-md-12" align="center">
-	<h1>Fix me</h1>
-	    <h1>{% trans "Products List" %}</h1>
-	</div>
-	{% if object_list %}
-	<div class="col-xs-12 col-md-12">
-	    {% for product in object_list %}
-	    <div class="" align="center">
-	    	<a href="">{{ object.name }}</a>
-	        <a href="" class="">{{ product.name }}</a>
-	        
-	        <h6>{{ product.id }}</h6>
-	    </div>
-	    {% endfor %}
-	</div>
-	{% else %}
-	<div class="col-xs-12 col-md-12" align="center">{% trans "No products were found" %}.</div>
-	{% endif %}
-	</div>
-
+    <div class="col-xs-12 col-md-12" align="center">
+        <h1>Fix me</h1>
+        <h1>{% trans "Products List" %}</h1>
+    </div>
+    {% if object_list %}
+    <div class="col-xs-12 col-md-12">
+        {% for object in object_list %}
+        <div class="" align="center">
+            <a href="{% url 'products-app:product-detail' category_slug subcategory_slug object.product_slug %}">{{ object.name }}</a>
+            <h6>{{ object.id }}</h6>
+            <h6>product_slug:{{ object.product_slug }}</h6>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="col-xs-12 col-md-12" align="center">{% trans "No products were found" %}.</div>
+    {% endif %}
 </section>
 {% endblock %}
 
