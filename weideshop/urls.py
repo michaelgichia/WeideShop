@@ -31,3 +31,7 @@ urlpatterns = [
     url(r'^category/', include('weideshop.products.urls', namespace='products-app', app_name='products')),
     
 ] 
+
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

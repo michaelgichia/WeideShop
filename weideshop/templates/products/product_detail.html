@@ -1,4 +1,6 @@
-{% extends "base.html" %} 
+{% extends "base.html" %}
+
+{% load staticfiles %} 
 {% load i18n %} 
 {% block title %}{{ object.title }}{% endblock %} 
 
@@ -9,7 +11,7 @@
 </div>
 <div class="row">
     <div class="col-md-6">
-        <img src="{{ object.image.url }}" class="thumbnail" alt="{{ object.title }}" height="300" width="300">
+        <img src="{{ object.image.url }}" class="thumbnail" alt="{{ object.name }}" height="300" width="300" />
     </div>
 </div>
 </section>
