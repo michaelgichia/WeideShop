@@ -60,8 +60,6 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = ''
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -78,7 +76,9 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = ''
+WSGI_APPLICATION = 'weideshop.wsgi.application'
+
+ROOT_URLCONF = 'weideshop.urls'
 
 
 # Database
