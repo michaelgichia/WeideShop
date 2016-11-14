@@ -1,9 +1,10 @@
 # Third party stuff
 from django.test import TestCase
+from django.utils import timezone
 
 # Our stuff
 from weideshop.products.models import Category, Subcategory, Product 
-from weideshop.tests.factories.products import CategoryFactory
+from weideshop.tests.factories.products.category import CategoryFactory
 
 class CategoryModelTest(TestCase):
 
@@ -34,9 +35,4 @@ class CategoryModelTest(TestCase):
 
 	def test_verbose_name_plural(self):
 		self.assertEqual(str(Category._meta.verbose_name_plural), 'categories')
-		
-	# def test_is_active_category(self):
-	# 	self.third_category = Category(name='Furnitures', is_active=False)
-	# 	self.third_category.save()
-
-	# 	self.assertTrue(self.third_category.active, False)
+	
